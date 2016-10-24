@@ -31,13 +31,13 @@ def config():
 def load_tags(filename):
     """Load input file."""
     with open(filename) as fp:
-        tags = fp.read()
+        tags = fp.read().split()
     return tags
 
 
 def de_hash(tags):
     """Remove optional leading pound signs."""
-    return [t.replace('#', '') for t in tags.split()]
+    return [t.replace('#', '') for t in tags]
 
 
 def de_dupe(tags):
