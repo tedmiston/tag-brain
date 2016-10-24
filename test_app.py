@@ -40,5 +40,5 @@ def test_de_hash(tags_in, tags_out):
 )
 def test_load_tags(input_file_contents, tags_out):
     m = mock_open(read_data=input_file_contents)
-    with patch('builtins.open', m) as mock_fp:
+    with patch('builtins.open', m):
         assert load_tags('_.txt') == tags_out
