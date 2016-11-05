@@ -28,11 +28,20 @@ def config():
     return parser.parse_args()
 
 
-def load_tags(filename):
+def load_input(filename, caption_divider='---'):
     """Load input file."""
     with open(filename) as fp:
-        tags = fp.read().split()
-    return tags
+        input_file = fp.read()
+
+    if caption_divider in input_file:
+        caption, tags = input_file.split(caption_divider)
+        caption = caption.strip()
+    else:
+        caption = None
+        tags = input_file
+
+    tags = tags.strip().split()
+    return caption, tags
 
 
 def de_hash(tags):
@@ -45,7 +54,7 @@ def de_dupe(tags):
     return list(set(tags))
 
 
-def output(tags, spaces, dots):
+def output(caption, tags, spaces, dots):
     """Print a list of hashtags to be pasted into Instagram."""
     MAX_TAGS_LIMIT = 30  # more than this and comment will fail
     MIN_LINES_TO_COLLAPSE = 5  # five lines collapses the comment on mobile
@@ -56,16 +65,21 @@ def output(tags, spaces, dots):
     dots = '\n.' * MIN_LINES_TO_COLLAPSE if dots else ''
     separator = ' ' if spaces else '\n'
     tag_list = separator.join(['#' + t for t in tags])
-    print('\n'.join([header, dots, tag_list]))
+    output_components = [header]
+    if caption is not None:
+        output_components.append('\n' + caption)
+    output_components += [dots, tag_list]
+    tag_comment = '\n'.join(output_components)
+    print(tag_comment)
 
 
 def main():
     args = config()
-    tags = load_tags(filename=args.file)
+    caption, tags = load_input(filename=args.file)
     tags = de_hash(tags)
     tags = de_dupe(tags)
     tags = sorted(tags)
-    output(tags, spaces=args.spaces, dots=args.dots)
+    output(caption, tags, spaces=args.spaces, dots=args.dots)
 
 
 if __name__ == '__main__':
