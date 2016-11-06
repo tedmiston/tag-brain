@@ -37,6 +37,12 @@ def test_de_hash(tags_in, tags_out):
     ('foo', None, ['foo']),
     ('#foo #bar', None, ['#foo', '#bar']),
     ('#foo #bar baz bar', None, ['#foo', '#bar', 'baz', 'bar']),
+    ('Sample caption\n---', 'Sample caption', []),
+    ('Sample caption\n---\n', 'Sample caption', []),
+    ('Sample caption\n---\nfoo bar', 'Sample caption', ['foo', 'bar']),
+    ('Sample caption\n---\n#foo #bar', 'Sample caption', ['#foo', '#bar']),
+    ('Sample caption\n\n---\n\n#foo #bar', 'Sample caption', ['#foo', '#bar']),
+    ('Sample\n\nmulti-line\n\ncaption\n\n---\n\n#foo #bar', 'Sample\n\nmulti-line\n\ncaption', ['#foo', '#bar']),
 )
 def test_load_input(input_file_contents, caption, tags_out):
     m = mock_open(read_data=input_file_contents)
