@@ -2,7 +2,7 @@ from unittest.mock import mock_open, patch
 
 from nose2.tools.params import params
 
-from app import de_dupe, de_hash, load_tags
+from app import de_dupe, de_hash, load_input
 
 
 def check_equalish(list1, list2):
@@ -33,12 +33,12 @@ def test_de_hash(tags_in, tags_out):
 
 
 @params(
-    ('', []),
-    ('foo', ['foo']),
-    ('#foo #bar', ['#foo', '#bar']),
-    ('#foo #bar baz bar', ['#foo', '#bar', 'baz', 'bar']),
+    ('', (None, [])),
+    ('foo', (None, ['foo'])),
+    ('#foo #bar', (None, ['#foo', '#bar'])),
+    ('#foo #bar baz bar', (None, ['#foo', '#bar', 'baz', 'bar'])),
 )
-def test_load_tags(input_file_contents, tags_out):
+def test_load_input(input_file_contents, tags_out):
     m = mock_open(read_data=input_file_contents)
     with patch('builtins.open', m):
-        assert load_tags('_.txt') == tags_out
+        assert load_input('_.txt') == tags_out
