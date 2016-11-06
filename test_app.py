@@ -33,12 +33,12 @@ def test_de_hash(tags_in, tags_out):
 
 
 @params(
-    ('', (None, [])),
-    ('foo', (None, ['foo'])),
-    ('#foo #bar', (None, ['#foo', '#bar'])),
-    ('#foo #bar baz bar', (None, ['#foo', '#bar', 'baz', 'bar'])),
+    ('', None, []),
+    ('foo', None, ['foo']),
+    ('#foo #bar', None, ['#foo', '#bar']),
+    ('#foo #bar baz bar', None, ['#foo', '#bar', 'baz', 'bar']),
 )
-def test_load_input(input_file_contents, tags_out):
+def test_load_input(input_file_contents, caption, tags_out):
     m = mock_open(read_data=input_file_contents)
     with patch('builtins.open', m):
-        assert load_input('_.txt') == tags_out
+        assert load_input('_.txt') == (caption, tags_out)
