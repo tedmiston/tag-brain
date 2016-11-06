@@ -29,7 +29,7 @@ def config():
 
 
 def load_input(filename, caption_divider='---'):
-    """Load input file."""
+    """Load an input file of zero or more tags with optional caption."""
     with open(filename) as fp:
         input_file = fp.read()
 
