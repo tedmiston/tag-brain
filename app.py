@@ -54,13 +54,12 @@ def de_dupe(tags):
     return list(set(tags))
 
 
-def output(caption, tags, spaces, dots):
+def output(caption, tags, spaces, dots, tag_limit=30):
     """Print a list of hashtags to be pasted into Instagram."""
-    MAX_TAGS_LIMIT = 30  # more than this and comment will fail
     MIN_LINES_TO_COLLAPSE = 5  # five lines collapses the comment on mobile
     header = '{} tags'.format(len(tags))
-    if len(tags) > MAX_TAGS_LIMIT:
-        warning = '*Warning: IG limits each photo to {} tags*'.format(MAX_TAGS_LIMIT)
+    if len(tags) > tag_limit:
+        warning = '*Warning: You have exceeded the max of {} tags*'.format(tag_limit)
         header = ' '.join([header, warning])
     dots = '\n.' * MIN_LINES_TO_COLLAPSE if dots else ''
     separator = ' ' if spaces else '\n'
