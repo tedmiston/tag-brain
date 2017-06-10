@@ -54,22 +54,35 @@ def de_dupe(tags):
     return list(set(tags))
 
 
-def output(caption, tags, spaces, dots, tag_limit=30):
-    """Print a list of hashtags to be pasted into Instagram."""
-    MIN_LINES_TO_COLLAPSE = 5  # five lines collapses the comment on mobile
+def build_header(tags):
+    """Construct a header line with tag count and warn if too many."""
+    MAX_TAGS = 30  # max hashtags allowed per post
     header = '{} tags'.format(len(tags))
-    if len(tags) > tag_limit:
-        warning = '*Warning: You have exceeded the max of {} tags*'.format(tag_limit)
-        header = ' '.join([header, warning])
-    dots = '\n.' * MIN_LINES_TO_COLLAPSE if dots else ''
+    warning_tmpl = '*Warning: You have exceeded the max of {} tags*'
+    warning = warning_tmpl.format(MAX_TAGS) if len(tags) > MAX_TAGS else ''
+    return ' '.join([header, warning]).strip()
+
+
+def get_collapser(show):
+    """Preceding a comment with five dots collapses it on mobile."""
+    return '\n.' * 5 if show else ''
+
+
+def create_tag_str(tags, spaces):
+    """Convert a list of tags into a joined string."""
     separator = ' ' if spaces else '\n'
-    tag_list = separator.join(['#' + t for t in tags])
-    output_components = [header]
-    if caption is not None:
-        output_components.append('\n' + caption)
-    output_components += [dots, tag_list]
-    tag_comment = '\n'.join(output_components)
-    print(tag_comment)
+    tag_list = ['#' + t for t in tags]
+    return separator.join(tag_list)
+
+
+def output(caption, tags, spaces, dots):
+    """Print the caption and hashtags to be pasted into Instagram."""
+    header = build_header(tags)
+    pre_caption = '' if caption is not None else None
+    dots = get_collapser(show=dots)
+    tag_str = create_tag_str(tags=tags, spaces=spaces)
+    components = [header, pre_caption, caption, dots, tag_str]
+    print('\n'.join([i for i in components if i is not None]))
 
 
 def main():
