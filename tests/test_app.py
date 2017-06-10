@@ -36,6 +36,7 @@ def test_de_hash(tags_in, tags_out):
     ('', None, []),
     ('foo', None, ['foo']),
     ('#foo #bar', None, ['#foo', '#bar']),
+    ('#foo  #bar', None, ['#foo', '#bar']),
     ('#foo #bar baz bar', None, ['#foo', '#bar', 'baz', 'bar']),
     ('Sample caption\n---', 'Sample caption', []),
     ('Sample caption\n---\n', 'Sample caption', []),
