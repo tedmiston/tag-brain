@@ -1,3 +1,4 @@
 cov-core
 coverage
+invoke
 nose2
