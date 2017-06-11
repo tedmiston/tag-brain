@@ -1,3 +1,4 @@
+codecov
 cov-core
 coverage
 invoke

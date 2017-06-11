@@ -9,3 +9,5 @@ dependencies:
 test:
   override:
     - invoke test
+  post:
+    - codecov
