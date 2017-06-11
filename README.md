@@ -1,6 +1,6 @@
 # Tag Brain
 
-[![CircleCI](https://img.shields.io/circleci/project/github/tedmiston/tag-brain.svg)](https://circleci.com/gh/tedmiston/tag-brain) [![Codacy Badge](https://api.codacy.com/project/badge/Grade/77dfeba1f8ce49dfadf60f2a2133a94e)](https://www.codacy.com/app/tedmiston/tag-brain?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=tedmiston/tag-brain&amp;utm_campaign=Badge_Grade) [![Code Climate](https://codeclimate.com/github/tedmiston/tag-brain/badges/gpa.svg)](https://codeclimate.com/github/tedmiston/tag-brain)
+[![CircleCI](https://img.shields.io/circleci/project/github/tedmiston/tag-brain.svg)](https://circleci.com/gh/tedmiston/tag-brain) [![codecov](https://codecov.io/gh/tedmiston/tag-brain/branch/master/graph/badge.svg)](https://codecov.io/gh/tedmiston/tag-brain) [![Codacy Badge](https://api.codacy.com/project/badge/Grade/77dfeba1f8ce49dfadf60f2a2133a94e)](https://www.codacy.com/app/tedmiston/tag-brain?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=tedmiston/tag-brain&amp;utm_campaign=Badge_Grade) [![Code Climate](https://codeclimate.com/github/tedmiston/tag-brain/badges/gpa.svg)](https://codeclimate.com/github/tedmiston/tag-brain)
 
 Increase the reach of Instagram posts.
 
