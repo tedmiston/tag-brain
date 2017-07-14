@@ -16,7 +16,7 @@ jobs:
             source venv/bin/activate
             pip install -r requirements-test.txt
       - save_cache:
-          key: deps-{{ .Branch }}-{{ checksum "setup.py" }}
+          key: deps-{{ .Branch }}-{{ checksum "requirements-test.txt" }}
           paths:
             - venv
       - run:
