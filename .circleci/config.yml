@@ -1,0 +1,30 @@
+version: 2
+
+jobs:
+  build:
+    docker:
+      - image: circleci/python:3
+    working_directory: ~/tag-brain
+    steps:
+      - checkout
+      - run:
+          name: Install dependencies
+          command: |
+            python -m venv venv
+            source venv/bin/activate
+            pip install -r requirements-test.txt
+      - run:
+          name: Run unit tests
+          command: |
+            source venv/bin/activate
+            invoke test
+      - run:
+          # Only run codecov on server (this env var isn't present for local builds)
+          name: Post to Codecov
+          command: |
+            if [[ -n $CIRCLE_BUILD_URL ]]; then
+              source venv/bin/activate
+              codecov
+            else
+              echo "Not running Codecov for local build"
+            fi
