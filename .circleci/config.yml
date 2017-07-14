@@ -7,12 +7,18 @@ jobs:
     working_directory: ~/tag-brain
     steps:
       - checkout
+      - restore_cache:
+          key: deps-{{ .Branch }}-{{ checksum "requirements-test.txt" }}
       - run:
           name: Install dependencies
           command: |
             python -m venv venv
             source venv/bin/activate
             pip install -r requirements-test.txt
+      - save_cache:
+          key: deps-{{ .Branch }}-{{ checksum "setup.py" }}
+          paths:
+            - venv
       - run:
           name: Run unit tests
           command: |
